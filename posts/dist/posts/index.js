@@ -19,8 +19,8 @@ const cors_1 = __importDefault(require("cors"));
 const axios_1 = __importDefault(require("axios"));
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
-const posts = [];
 app.use((0, cors_1.default)());
+const posts = [];
 app.get('/posts', (req, res) => {
     res.send(posts);
 });
@@ -29,7 +29,7 @@ app.post('/posts', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { title } = req.body;
     const newPost = { id, title, comments: [] };
     posts.push(newPost);
-    yield axios_1.default.post("http://localhost:4005/events", {
+    yield axios_1.default.post("http://event-bus-srv:4005/events", {
         type: "postCreated",
         data: newPost
     });
@@ -40,5 +40,6 @@ app.post('/events', (req, res) => {
     res.send({});
 });
 app.listen(4000, () => {
+    console.log("v50");
     console.log("Listenning in 4000");
 });

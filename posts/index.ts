@@ -23,7 +23,7 @@ app.post('/posts', async (req: Request, res: Response) => {
     const newPost: IPost = { id, title, comments: [] }
     posts.push(newPost);
 
-    await axios.post("http://localhost:4005/events", {
+    await axios.post("http://event-bus-srv:4005/events", {
         type: "postCreated",
         data: newPost
     })
@@ -36,5 +36,6 @@ app.post('/events', (req: Request, res: Response) => {
 })
 
 app.listen(4000, () => {
+    console.log("v50")
     console.log("Listenning in 4000")
 })
