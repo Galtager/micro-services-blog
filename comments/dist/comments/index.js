@@ -27,7 +27,7 @@ app.post('/posts/:id/comments', (req, res) => __awaiter(void 0, void 0, void 0, 
     const postID = req.params.id;
     const newComment = { id, postID, text, status: 'pending' };
     comments.push(newComment);
-    yield axios_1.default.post("http://localhost:4005/events", {
+    yield axios_1.default.post("http://event-bus-srv:4005/events", {
         type: "commentCreated",
         data: newComment
     });
@@ -45,7 +45,7 @@ app.post('/events', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             }
         });
         console.log("saving  commentModerated in list", comments);
-        yield axios_1.default.post("http://localhost:4005/events", {
+        yield axios_1.default.post("http://event-bus-srv:4005/events", {
             type: "commentUpdated",
             data
         });

@@ -19,7 +19,7 @@ app.post('/posts/:id/comments', async (req: Request, res: Response) => {
     const newComment: IComment = { id, postID, text, status: 'pending' }
     comments.push(newComment);
 
-    await axios.post("http://localhost:4005/events", {
+    await axios.post("http://event-bus-srv:4005/events", {
         type: "commentCreated",
         data: newComment
     });
@@ -40,7 +40,7 @@ app.post('/events', async (req: Request, res: Response) => {
             }
         });
         console.log("saving  commentModerated in list", comments)
-        await axios.post("http://localhost:4005/events", {
+        await axios.post("http://event-bus-srv:4005/events", {
             type: "commentUpdated",
             data
         });

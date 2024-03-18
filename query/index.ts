@@ -46,8 +46,13 @@ app.get('/posts', (req: Request, res: Response) => {
     res.send(posts)
 })
 
-app.post('/events', (req: Request, res: Response) => {
+app.post('/events', async (req: Request, res: Response) => {
     const { data, type } = req.body as BlogEvent
+    const events = await axios.get("http://event-bus-srv:4005/events");
+    events.data.forEach((event: BlogEvent) => {
+        console.log("proccesing event ", event.type)
+        handleEvent(event.data, event.type);
+    })
 
     handleEvent(data, type)
     res.send({})
@@ -55,9 +60,4 @@ app.post('/events', (req: Request, res: Response) => {
 
 app.listen(4002, async () => {
     console.log("Listenning in 4002");
-    const events = await axios.get("http://localhost:4005/events");
-    events.data.forEach((event: BlogEvent) => {
-        console.log("proccesing event ", event.type)
-        handleEvent(event.data, event.type);
-    })
 })

@@ -57,7 +57,7 @@ app.post('/events', (req, res) => {
 });
 app.listen(4002, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Listenning in 4002");
-    const events = yield axios_1.default.get("http://localhost:4005/events");
+    const events = yield axios_1.default.get("http://event-bus-srv:4005/events");
     events.data.forEach((event) => {
         console.log("proccesing event ", event.type);
         handleEvent(event.data, event.type);
