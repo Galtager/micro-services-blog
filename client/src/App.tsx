@@ -5,7 +5,7 @@ import PostList from "./components/PostList";
 function App() {
   return (
     <div className="container">
-      <h1>יצירת פוסט</h1>
+      <h1>יצירת פוסט!!!!</h1>
       <PostCreate />
       <hr />
       <h1>פוסטים</h1>
