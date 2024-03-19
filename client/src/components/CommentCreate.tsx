@@ -18,7 +18,7 @@ const CommentCreate: FC<CommentCreateProps> = ({ postID }) => {
         postID,
         text,
       };
-      await axios.post(`http://localhost:4001/posts/${postID}/comments`, newComment);
+      await axios.post(`http://posts.com/posts/${postID}/comments`, newComment);
       setText("");
     } catch (error) {
       console.error(error);
